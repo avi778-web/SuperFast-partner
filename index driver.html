@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuperFast-Partner  Drive with us on your terms</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandLime: '#c8ff00',
+                        brandLimeHover: '#b2f000',
+                        brandBg: '#fcfbf4',
+                        brandBgCard: '#f7f5e8',
+                        brandDark: '#0f172a',
+                        brandAccentBlue: '#0072ff',
+                        brandAccentPurple: '#7a00ff'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfbf4;
+            color: #0f172a;
+            overflow-x: hidden;
+        }
+
+        .highlight-box {
+            background-color: #c8ff00;
+            padding: 2px 14px;
+            border-radius: 12px;
+            display: inline-block;
+            color: #0f172a;
+            box-shadow: 0 4px 20px rgba(200, 255, 0, 0.4);
+        }
+
+        .brand-logo-box {
+            width: 42px;
+            height: 42px;
+            min-width: 42px;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(15, 23, 42, 0.08);
+            background: #ffffff;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+            padding: 2px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            image-rendering: auto;
+        }
+
+        .brand-logo-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            border-radius: 10px;
+            background: #ffffff;
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcfbf4;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+            opacity: 0;
+        }
+        .faq-answer.active {
+            max-height: 300px;
+            opacity: 1;
+        }
+
+        .modal-fade-in {
+            animation: fadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .coming-soon-card {
+            background: #ffffff;
+            border-radius: 30px;
+            max-width: 820px;
+            width: min(92vw, 820px);
+            padding: 18px 28px 22px;
+            position: relative;
+            box-shadow: 0 22px 50px rgba(0, 0, 0, 0.22);
+            border: 1px solid rgba(17, 17, 17, 0.04);
+        }
+
+        .coming-soon-close {
+            position: absolute;
+            top: 18px;
+            right: 20px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            color: #111111;
+            font-size: 34px;
+            line-height: 1;
+            cursor: pointer;
+            font-weight: 300;
+        }
+
+        .coming-soon-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: #c8f44a;
+            color: #111111;
+            font-size: 15px;
+            font-weight: 800;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            border-radius: 999px;
+            margin: 6px auto 28px;
+            box-shadow: 0 8px 20px rgba(200, 244, 74, 0.35);
+        }
+
+        .coming-soon-badge::before {
+            content: "🚀";
+            font-size: 18px;
+            transform: translateY(-1px);
+        }
+
+        .coming-soon-title {
+            font-size: clamp(2.5rem, 4vw, 4rem);
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: -0.06em;
+            color: #111111;
+            margin: 0 auto 18px;
+            max-width: 620px;
+        }
+
+        .coming-soon-copy {
+            max-width: 680px;
+            margin: 0 auto 32px;
+            color: #3a3a3a;
+            font-size: clamp(1.1rem, 2vw, 1.7rem);
+            line-height: 1.35;
+            font-weight: 400;
+        }
+
+        .coming-soon-cta {
+            width: 100%;
+            background: #c8f44a;
+            color: #111111;
+            border: none;
+            border-radius: 999px;
+            padding: 18px 24px;
+            font-size: 1.1rem;
+            font-weight: 900;
+            cursor: pointer;
+            box-shadow: 0 8px 18px rgba(200, 244, 74, 0.35);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .coming-soon-cta:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 12px 22px rgba(200, 244, 74, 0.4);
+        }
+
+        .driver-lang-selector img {
+            width: 20px;
+            height: 14px;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .driver-hero-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            opacity: 0;
+            animation: driverHeroSlide 20s infinite;
+            will-change: opacity;
+            backface-visibility: hidden;
+            transform: translateZ(0);
+        }
+
+        .driver-hero-slide:nth-child(1) { animation-delay: 0s; }
+        .driver-hero-slide:nth-child(2) { animation-delay: 5s; }
+        .driver-hero-slide:nth-child(3) { animation-delay: 10s; }
+        .driver-hero-slide:nth-child(4) { animation-delay: 15s; }
+
+        @keyframes driverHeroSlide {
+            0%, 20% { opacity: 1; }
+            25%, 95% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 640px) {
+            header > div {
+                height: auto;
+                min-height: 72px;
+                gap: 10px;
+            }
+
+            header .brand-logo-box {
+                width: 36px;
+                height: 36px;
+                min-width: 36px;
+                border-radius: 10px;
+            }
+
+            header .brand-logo-box img {
+                border-radius: 8px;
+            }
+
+            header .brand-logo-box + div {
+                min-width: 0;
+            }
+
+            header .brand-logo-box + div > span:first-child {
+                font-size: 1.1rem;
+                white-space: nowrap;
+            }
+
+            header #driverMobilityLabel {
+                display: none;
+            }
+
+            header > div > div:last-child {
+                gap: 6px;
+            }
+
+            header > div > div:last-child > button:first-child {
+                padding: 10px 12px;
+                font-size: 0;
+            }
+
+            header > div > div:last-child > button:first-child i {
+                font-size: 15px;
+            }
+
+            header > div > div:last-child > button:last-child {
+                padding: 9px 10px;
+                gap: 4px;
+            }
+
+            header > div > div:last-child > button:last-child svg {
+                width: 18px;
+                height: 18px;
+            }
+
+            section.relative.w-full.min-h-\[580px\] {
+                min-height: 610px;
+            }
+
+            section.relative.w-full.min-h-\[580px\] > div:last-child {
+                padding-top: 3.5rem;
+                padding-bottom: 3.5rem;
+            }
+
+            #driverHeroTitle {
+                font-size: 2.55rem;
+                line-height: 1.08;
+                margin-bottom: 1.5rem;
+            }
+
+            #driverHeroDescription {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin-bottom: 2rem;
+            }
+
+            #driverDownloadButton {
+                width: 100%;
+                padding: 0.9rem 1.25rem;
+                font-size: 1rem;
+                border-radius: 0.9rem;
+            }
+
+            .highlight-box {
+                padding-left: 10px;
+                padding-right: 10px;
+                border-radius: 9px;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative selection:bg-brandLime selection:text-black">
+
+    <!-- Sticky Navigation Header -->
+    <header class="w-full bg-[#fcfbf4]/90 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200/60 transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Clean & Clear Logo Section -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none py-2">
+                <div class="brand-logo-box transition-transform group-hover:scale-105">
+                    <img src="https://github.com/avi778-web/SuperFast/blob/main/fa58fef2-22c4-4d50-8cd8-80c074fd6d8f.jpg?raw=true" alt="SuperFast Logo">
+                </div>
+
+                <!-- Full Prominent Brand Text -->
+                <div class="flex flex-col justify-center">
+                    <span class="text-2xl sm:text-3xl font-black tracking-tight text-gray-950 leading-none">
+                        SuperFast-Partner
+                    </span>
+                    <span id="driverMobilityLabel" class="text-[10px] font-bold tracking-widest text-gray-500 uppercase mt-0.5">
+                        Mobility & Rides
+                    </span>
+                </div>
+            </a>
+
+            <!-- Right Header Controls -->
+            <div class="flex items-center gap-3 sm:gap-4">
+                <button onclick="openComingSoonModal()" class="bg-brandLime hover:bg-brandLimeHover text-gray-950 font-extrabold px-6 py-2.5 rounded-full transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-mobile-screen"></i>
+                    Get the App
+                </button>
+
+                <button class="flex items-center gap-2 px-3.5 py-2 rounded-full border border-gray-200 bg-white hover:bg-gray-100 text-gray-800 text-sm font-semibold transition-all" onclick="openDriverLangModal()">
+                    <svg class="w-5 h-5 rounded-full object-cover shadow-xs" viewBox="0 0 640 480">
+                        <g fill-rule="evenodd" stroke-width="1pt">
+                            <path fill="#f93" d="M0 0h640v160H0z"/>
+                            <path fill="#fff" d="M0 160h640v160H0z"/>
+                            <path fill="#12ad2b" d="M0 320h640v160H0z"/>
+                        </g>
+                        <circle cx="320" cy="240" r="60" fill="none" stroke="#000080" stroke-width="12"/>
+                    </svg>
+                    <span id="driverLangCode">En</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative w-full min-h-[580px] lg:min-h-[640px] flex items-center bg-gray-950 overflow-hidden">
+        <div class="absolute inset-0 z-0">
+              <img src="https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=1400&q=70"
+                  alt="Driver on the road"
+                  fetchpriority="high" decoding="async"
+                  class="driver-hero-slide lg:object-right filter brightness-90">
+              <img src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1400&q=70"
+                  alt="Car driving through the city"
+                  loading="lazy" decoding="async"
+                  class="driver-hero-slide lg:object-right filter brightness-90">
+              <img src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1400&q=70"
+                  alt="SuperFast driver car"
+                  loading="lazy" decoding="async"
+                  class="driver-hero-slide lg:object-right filter brightness-90">
+              <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1400&q=70"
+                  alt="Driver ready for a trip"
+                  loading="lazy" decoding="async"
+                  class="driver-hero-slide lg:object-right filter brightness-90">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/60 to-transparent"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full py-16 lg:py-24 relative z-10">
+            <div class="max-w-2xl text-left">
+                <h1 id="driverHeroTitle" class="text-4xl sm:text-6xl lg:text-7xl font-black text-white leading-tight sm:leading-none tracking-tight mb-8">
+                    Drive with us<br class="hidden sm:inline"/> on 
+                    <span class="highlight-box mt-2 sm:mt-0">your terms</span>
+                </h1>
+
+                <p id="driverHeroDescription" class="text-gray-200 text-lg sm:text-xl font-medium mb-10 max-w-lg leading-relaxed">
+                    Set your own fares, choose your passengers, and experience complete freedom on every trip with SuperFast.
+                </p>
+
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+                    <button id="driverDownloadButton" onclick="openComingSoonModal()" class="bg-brandLime hover:bg-brandLimeHover text-gray-950 text-lg font-extrabold px-8 py-4 rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-2xl flex items-center justify-center gap-3">
+                        <i class="fa-solid fa-download text-xl"></i>
+                        Download the app
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="w-full py-20 bg-[#fcfbf4]">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 id="driverFeaturesTitle" class="text-3xl sm:text-5xl font-black text-gray-900 tracking-tight">
+                    Why drivers <span class="highlight-box">choose us</span>
+                </h2>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-sm border border-gray-100/80 max-w-6xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+                    <div class="lg:col-span-5 relative flex justify-center items-center">
+                        <div class="relative w-full max-w-md aspect-square flex items-center justify-center">
+                            <svg class="absolute w-full h-full text-brandLime scale-110 drop-shadow-md" viewBox="0 0 200 200" fill="currentColor">
+                                <path d="M100,180 C20,120 0,70 40,30 C70,0 100,30 100,30 C100,30 130,0 160,30 C200,70 180,120 100,180 Z" />
+                            </svg>
+                            <img src="https://static.vecteezy.com/system/resources/thumbnails/057/228/399/small_2x/a-woman-in-glasses-holding-a-laptop-free-png.png" 
+                                 alt="SuperFast Driver" 
+                                 class="relative z-10 w-full h-full object-cover rounded-3xl drop-shadow-lg">
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-7 flex flex-col gap-8">
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-14 h-14 min-w-[56px] rounded-2xl bg-brandLime flex items-center justify-center text-gray-950 text-2xl shadow-sm transition-transform group-hover:scale-110">
+                                <i class="fa-solid fa-credit-card"></i>
+                            </div>
+                            <div>
+                                <h3 id="driverFeatureTitle1" class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Pricing control</h3>
+                                <p id="driverFeatureText1" class="text-gray-600 font-normal leading-relaxed text-base">
+                                    Offer your own price if you don't like the passenger's initial offer
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-14 h-14 min-w-[56px] rounded-2xl bg-brandLime flex items-center justify-center text-gray-950 text-2xl shadow-sm transition-transform group-hover:scale-110">
+                                <i class="fa-solid fa-route"></i>
+                            </div>
+                            <div>
+                                <h3 id="driverFeatureTitle2" class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Route visibility</h3>
+                                <p id="driverFeatureText2" class="text-gray-600 font-normal leading-relaxed text-base">
+                                    See the route before you accept the order
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-14 h-14 min-w-[56px] rounded-2xl bg-brandLime flex items-center justify-center text-gray-950 text-2xl shadow-sm transition-transform group-hover:scale-110">
+                                <i class="fa-solid fa-lock-open"></i>
+                            </div>
+                            <div>
+                                <h3 id="driverFeatureTitle3" class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Freedom to choose</h3>
+                                <p id="driverFeatureText3" class="text-gray-600 font-normal leading-relaxed text-base">
+                                    Skip as many ride requests as you like, with zero penalties.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-5 group">
+                            <div class="w-14 h-14 min-w-[56px] rounded-2xl bg-brandLime flex items-center justify-center text-gray-950 text-2xl shadow-sm transition-transform group-hover:scale-110">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                            <div>
+                                <h3 id="driverFeatureTitle4" class="text-xl sm:text-2xl font-bold text-gray-900 mb-1">Safety and support</h3>
+                                <p id="driverFeatureText4" class="text-gray-600 font-normal leading-relaxed text-base">
+                                    24/7 in-app support, plus safety features and emergency calls.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="w-full py-20 bg-[#fcfbf4]">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <span class="inline-block px-5 py-1.5 bg-gray-200/80 text-gray-800 text-xs font-bold uppercase tracking-wider rounded-full mb-4">
+                    FAQ
+                </span>
+                <h2 id="driverFaqTitle" class="text-3xl sm:text-5xl font-black text-gray-900 tracking-tight">
+                    Frequently asked <span class="highlight-box">questions</span>
+                </h2>
+            </div>
+
+            <div class="flex flex-col gap-4">
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-200">
+                    <button class="faq-btn w-full px-6 py-5 sm:py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="text-lg sm:text-xl font-bold text-gray-900 pr-4">
+                            What are the requirements for drivers?
+                        </span>
+                        <div class="faq-icon-box w-10 h-10 min-w-[40px] rounded-full bg-brandLime flex items-center justify-center text-gray-950 text-lg transition-transform duration-300">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                            To drive with SuperFast, aadhar card, pancard, license are required along with a valid driver's license, vehicle registration, active insurance, and a smartphone and offline inquiry.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-200">
+                    <button class="faq-btn w-full px-6 py-5 sm:py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="text-lg sm:text-xl font-bold text-gray-900 pr-4">
+                            I’ve changed my phone number, now I can’t log into my account
+                        </span>
+                        <div class="faq-icon-box w-10 h-10 min-w-[40px] rounded-full bg-brandLime flex items-center justify-center text-gray-950 text-lg transition-transform duration-300">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                            You can easily update your phone number by selecting "Need help logging in?" on the login screen.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-200">
+                    <button class="faq-btn w-full px-6 py-5 sm:py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="text-lg sm:text-xl font-bold text-gray-900 pr-4">
+                            How do I change my profile photo in SuperFast?
+                        </span>
+                        <div class="faq-icon-box w-10 h-10 min-w-[40px] rounded-full bg-brandLime flex items-center justify-center text-gray-950 text-lg transition-transform duration-300">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                            Open your profile, tap your current photo, and choose a new image from your device.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden transition-all duration-200">
+                    <button class="faq-btn w-full px-6 py-5 sm:py-6 flex items-center justify-between text-left focus:outline-none" onclick="toggleFaq(this)">
+                        <span class="text-lg sm:text-xl font-bold text-gray-900 pr-4">
+                            How do I delete my SuperFast account?
+                        </span>
+                        <div class="faq-icon-box w-10 h-10 min-w-[40px] rounded-full bg-brandLime flex items-center justify-center text-gray-950 text-lg transition-transform duration-300">
+                            <i class="fa-solid fa-plus"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6">
+                        <div class="pb-6 text-gray-600 text-base leading-relaxed border-t border-gray-100 pt-4">
+                            Go to account settings, select Delete account, and follow the confirmation steps.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expanded Footer Section -->
+    <footer class="bg-gray-950 text-white pt-16 pb-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+                
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Why choose SuperFast</h3>
+                    <ul class="space-y-2.5 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Fair services</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">City rides</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">City to City rides</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Delivery</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Earn with SuperFast</h3>
+                    <ul class="space-y-2.5 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Earn with us</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">City rides</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">City to City rides</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Courier</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Freight</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Safety</h3>
+                    <ul class="space-y-2.5 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Safety pact</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Safety for passengers</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Safety for drivers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">About us</h3>
+                    <ul class="space-y-2.5 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Company</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Careers</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Newsroom</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">Support</h3>
+                    <ul class="space-y-2.5 text-sm text-gray-400">
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Passengers</a></li>
+                        <li><a href="#" class="hover:text-brandLime transition-colors">Drivers</a></li>
+                        <li>
+                            <a href="javascript:void(0)" onclick="openAppIssuesPage()" class="text-brandLime hover:underline font-medium flex items-center gap-1.5">
+                                <i class="fa-solid fa-triangle-exclamation text-xs"></i>
+                                App issues
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Footer Bottom Bar with Clean Logo -->
+            <div class="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="brand-logo-box w-8 h-8 sm:w-9 sm:h-9 rounded-lg">
+                        <img src="https://github.com/avi778-web/SuperFast/blob/main/fa58fef2-22c4-4d50-8cd8-80c074fd6d8f.jpg?raw=true" alt="SuperFast Logo">
+                    </div>
+                    <span class="text-2xl font-black text-white tracking-tight">SuperFast</span>
+                </div>
+                <span class="text-gray-500 text-sm">© 2026 SuperFast Mobility Inc. All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal 1: Coming Soon Modal -->
+    <div id="comingSoonModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="coming-soon-card modal-fade-in">
+            <button onclick="closeComingSoonModal()" class="coming-soon-close" aria-label="Close modal">&times;</button>
+
+            <div class="text-center">
+                <div class="coming-soon-badge">Coming Soon</div>
+                <h3 class="coming-soon-title">SuperFast App is launching soon!</h3>
+                <p class="coming-soon-copy">
+                    We are crafting the ultimate ride-hailing experience with zero commission surge and fair fare negotiation. Get ready to experience ultra-fast rides!
+                </p>
+                <button onclick="closeComingSoonModal()" class="coming-soon-cta">Got It!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Language Selection Modal -->
+    <div id="driverLangModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-md w-full relative shadow-2xl">
+            <button onclick="closeDriverLangModal()" class="absolute top-4 right-5 text-gray-500 hover:text-gray-900 text-3xl" aria-label="Close language selection">&times;</button>
+            <h2 class="text-2xl font-black text-gray-900 mb-6">Country and language</h2>
+            <label for="driverLanguageSelect" class="block text-sm font-bold text-gray-700 mb-2">Language</label>
+            <select id="driverLanguageSelect" class="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-gray-900 font-semibold focus:outline-none focus:ring-2 focus:ring-brandLime">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+            </select>
+            <button onclick="saveDriverLanguage()" class="mt-6 w-full bg-brandLime hover:bg-brandLimeHover text-gray-950 font-extrabold px-6 py-3 rounded-full transition-all">Save</button>
+        </div>
+    </div>
+
+    <!-- Modal 2: App Issues Dedicated Page -->
+    <div id="appIssuesPage" class="fixed inset-0 z-50 bg-[#fcfbf4] hidden overflow-y-auto">
+        <div class="min-h-screen flex flex-col justify-between p-6 sm:p-12 max-w-4xl mx-auto relative">
+            
+            <button onclick="closeAppIssuesPage()" class="absolute top-6 right-6 bg-gray-200 hover:bg-gray-300 text-gray-900 font-bold px-4 py-2 rounded-full text-sm flex items-center gap-2 transition-colors">
+                <i class="fa-solid fa-arrow-left"></i> Back to Main
+            </button>
+
+            <div class="flex flex-col items-center text-center mt-10 mb-8">
+                <div class="w-16 h-16 bg-brandLime rounded-2xl mb-4 flex items-center justify-center text-gray-950 text-3xl shadow-lg">
+                    <i class="fa-solid fa-bolt"></i>
+                </div>
+                <h1 class="text-3xl sm:text-4xl font-black text-black tracking-tight mb-2">SuperFast Support Center</h1>
+                <p class="text-gray-600 font-medium text-lg">App Issues & Technical Help</p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200 shadow-xl space-y-6">
+                <h2 class="text-2xl font-bold text-gray-900 border-b pb-4">Having trouble with SuperFast?</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandLime transition-all">
+                        <i class="fa-solid fa-location-crosshairs text-2xl text-blue-600 mb-2"></i>
+                        <h3 class="font-bold text-gray-900 mb-1">GPS & Location Errors</h3>
+                        <p class="text-sm text-gray-600">Make sure high accuracy location is turned on in your device settings.</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandLime transition-all">
+                        <i class="fa-solid fa-user-lock text-2xl text-purple-600 mb-2"></i>
+                        <h3 class="font-bold text-gray-900 mb-1">Login & Verification</h3>
+                        <p class="text-sm text-gray-600">Re-verify your registered phone number or request an OTP reset.</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandLime transition-all">
+                        <i class="fa-solid fa-credit-card text-2xl text-emerald-600 mb-2"></i>
+                        <h3 class="font-bold text-gray-900 mb-1">Payment & Earnings</h3>
+                        <p class="text-sm text-gray-600">Check active payment options or driver payout history in account section.</p>
+                    </div>
+
+                    <div class="p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:border-brandLime transition-all">
+                        <i class="fa-solid fa-headset text-2xl text-amber-600 mb-2"></i>
+                        <h3 class="font-bold text-gray-900 mb-1">24/7 Direct Support</h3>
+                        <p class="text-sm text-gray-600">Reach out to our engineering team directly at support@superfast.com</p>
+                    </div>
+                </div>
+
+                <div class="pt-4 text-center">
+                    <button onclick="closeAppIssuesPage()" class="bg-brandLime hover:bg-brandLimeHover text-gray-950 font-extrabold px-8 py-3.5 rounded-full transition-all">
+                        Got It, Take Me Back
+                    </button>
+                </div>
+            </div>
+
+            <div class="text-center py-6 text-sm text-gray-500">
+                SuperFast Help Desk • Powered by SuperFast Mobility
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFaq(buttonElement) {
+            const answerBox = buttonElement.nextElementSibling;
+            const iconBox = buttonElement.querySelector('.faq-icon-box');
+            const isCurrentlyActive = answerBox.classList.contains('active');
+
+            document.querySelectorAll('.faq-answer').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.faq-icon-box').forEach(box => {
+                box.classList.remove('rotate-45', 'bg-gray-900', 'text-white');
+                box.classList.add('bg-brandLime', 'text-gray-950');
+                box.querySelector('i').className = 'fa-solid fa-plus';
+            });
+
+            if (!isCurrentlyActive) {
+                answerBox.classList.add('active');
+                iconBox.classList.add('rotate-45', 'bg-gray-900', 'text-white');
+                iconBox.classList.remove('bg-brandLime', 'text-gray-950');
+            }
+        }
+
+        function openComingSoonModal() {
+            document.getElementById('comingSoonModal').classList.remove('hidden');
+        }
+
+        function closeComingSoonModal() {
+            document.getElementById('comingSoonModal').classList.add('hidden');
+        }
+
+        let driverLanguage = 'en';
+
+        const driverTranslations = {
+            en: {
+                code: 'En',
+                mobility: 'Mobility',
+                getApp: 'Get the App',
+                heroTitle: 'Drive with us| on |your terms',
+                heroDescription: 'Set your own fares, choose your passengers, and experience complete freedom on every trip with SuperFast.',
+                download: 'Download the app',
+                featuresTitle: 'Why drivers| choose us',
+                featureTitles: ['Pricing control', 'Route visibility', 'Freedom to choose', 'Safety and support'],
+                featureTexts: [
+                    "Offer your own price if you don't like the passenger's initial offer",
+                    'See the route before you accept the order',
+                    'Skip as many ride requests as you like, with zero penalties.',
+                    '24/7 in-app support, plus safety features and emergency calls.'
+                ],
+                faqTitle: 'Frequently asked| questions',
+                faqQuestions: ['What are the requirements for drivers?', 'I\'ve changed my phone number, now I can\'t log into my account', 'How do I change my profile photo in SuperFast?', 'How do I delete my SuperFast account?'],
+                faqAnswers: [
+                    "To drive with SuperFast, you need a valid driver's license, vehicle registration, active insurance, and a smartphone.",
+                    'You can easily update your phone number by selecting "Need help logging in?" on the login screen.',
+                    'Open your profile, tap your current photo, and choose a new image from your device.',
+                    'Go to account settings, select Delete account, and follow the confirmation steps.'
+                ],
+                faqQuestionsHi: ['ड्राइवर बनने के लिए क्या आवश्यकताएं हैं?', 'मैंने अपना फोन नंबर बदल दिया है, अब मैं अपने अकाउंट में लॉगिन नहीं कर पा रहा हूं', 'मैं अपनी प्रोफाइल फोटो कैसे बदलूं?', 'मैं अपना SuperFast अकाउंट कैसे डिलीट करूं?'],
+                faqAnswersHi: [
+                    'SuperFast के साथ ड्राइव करने के लिए आपके पास वैध ड्राइविंग लाइसेंस, वाहन पंजीकरण, सक्रिय बीमा और स्मार्टफोन होना चाहिए।',
+                    'लॉगिन स्क्रीन पर "लॉगिन में सहायता चाहिए?" चुनकर अपना फोन नंबर आसानी से अपडेट करें।',
+                    'अपनी प्रोफाइल खोलें, वर्तमान फोटो पर टैप करें और अपने डिवाइस से नई फोटो चुनें।',
+                    'अकाउंट सेटिंग में जाएं, अकाउंट डिलीट करें चुनें और पुष्टि के चरण पूरे करें।'
+                ],
+                footerHeadings: ['Why choose SuperFast', 'Earn with SuperFast', 'Safety', 'About us', 'Support'],
+                footerLinks: ['Fair services', 'City rides', 'City to City rides', 'Delivery', 'Earn with us', 'City rides', 'City to City rides', 'Courier', 'Freight', 'Safety pact', 'Safety for passengers', 'Safety for drivers', 'Company', 'Careers', 'Newsroom', 'Blog', 'Passengers', 'Drivers', 'App issues'],
+                appIssues: ['Back to Main', 'SuperFast Support Center', 'App Issues & Technical Help', 'Having trouble with SuperFast?', 'GPS & Location Errors', 'Make sure high accuracy location is turned on in your device settings.', 'Login & Verification', 'Re-verify your registered phone number or request an OTP reset.', 'Payment & Earnings', 'Check active payment options or driver payout history in account section.', '24/7 Direct Support', 'Reach out to our engineering team directly at support@superfast.com', 'Got It, Take Me Back', 'SuperFast Help Desk • Powered by SuperFast Mobility'],
+                modal: ['Coming Soon', 'SuperFast App is launching soon!', 'We are crafting the ultimate ride-hailing experience with zero commission surge and fair fare negotiation. Get ready to experience ultra-fast rides!', 'Got It!', 'Country and language', 'Language', 'Save']
+            },
+            hi: {
+                code: 'Hi',
+                mobility: 'मोबिलिटी',
+                getApp: 'ऐप प्राप्त करें',
+                heroTitle: 'हमारे साथ ड्राइव करें| अपनी |शर्तों पर',
+                heroDescription: 'अपना किराया तय करें, अपने यात्रियों को चुनें और हर सफर में पूरी आजादी का अनुभव करें।',
+                download: 'ऐप डाउनलोड करें',
+                featuresTitle: 'ड्राइवर हमें| क्यों |चुनते हैं',
+                featureTitles: ['कीमत पर नियंत्रण', 'रूट की जानकारी', 'चुनने की आजादी', 'सुरक्षा और सहायता'],
+                featureTexts: [
+                    'यात्री की शुरुआती कीमत पसंद न आने पर अपनी कीमत बताएं',
+                    'ऑर्डर स्वीकार करने से पहले रूट देखें',
+                    'बिना किसी जुर्माने के जितनी चाहें राइड रिक्वेस्ट छोड़ें।',
+                    '24/7 इन-ऐप सहायता, सुरक्षा सुविधाएं और आपातकालीन कॉल।'
+                ],
+                faqTitle: 'अक्सर पूछे जाने वाले| प्रश्न',
+                faqQuestions: ['ड्राइवर बनने के लिए क्या आवश्यकताएं हैं?', 'मैंने अपना फोन नंबर बदल दिया है, अब मैं अपने अकाउंट में लॉगिन नहीं कर पा रहा हूं', 'मैं अपनी प्रोफाइल फोटो कैसे बदलूं?', 'मैं अपना SuperFast अकाउंट कैसे डिलीट करूं?'],
+                faqAnswers: [
+                    'SuperFast के साथ ड्राइव करने के लिए आपके पास वैध ड्राइविंग लाइसेंस, वाहन पंजीकरण, सक्रिय बीमा और स्मार्टफोन होना चाहिए।',
+                    'लॉगिन स्क्रीन पर "लॉगिन में सहायता चाहिए?" चुनकर अपना फोन नंबर आसानी से अपडेट करें।',
+                    'अपनी प्रोफाइल खोलें, वर्तमान फोटो पर टैप करें और अपने डिवाइस से नई फोटो चुनें।',
+                    'अकाउंट सेटिंग में जाएं, अकाउंट डिलीट करें चुनें और पुष्टि के चरण पूरे करें।'
+                ],
+                footerHeadings: ['SuperFast क्यों चुनें', 'SuperFast के साथ कमाएं', 'सुरक्षा', 'हमारे बारे में', 'सहायता'],
+                footerLinks: ['उचित सेवाएं', 'शहर की राइड', 'शहर से शहर की राइड', 'डिलीवरी', 'हमारे साथ कमाएं', 'शहर की राइड', 'शहर से शहर की राइड', 'कूरियर', 'माल ढुलाई', 'सुरक्षा समझौता', 'यात्रियों की सुरक्षा', 'ड्राइवरों की सुरक्षा', 'कंपनी', 'करियर', 'न्यूज़रूम', 'ब्लॉग', 'यात्री', 'ड्राइवर', 'ऐप की समस्याएं'],
+                appIssues: ['मुख्य पेज पर वापस', 'SuperFast सहायता केंद्र', 'ऐप की समस्याएं और तकनीकी सहायता', 'क्या आपको SuperFast में परेशानी हो रही है?', 'GPS और लोकेशन की समस्याएं', 'अपने डिवाइस की सेटिंग में हाई एक्यूरेसी लोकेशन चालू करें।', 'लॉगिन और सत्यापन', 'अपने रजिस्टर्ड फोन नंबर को दोबारा सत्यापित करें या OTP रीसेट करें।', 'भुगतान और कमाई', 'अकाउंट सेक्शन में भुगतान विकल्प या ड्राइवर भुगतान इतिहास देखें।', '24/7 सीधी सहायता', 'हमारी इंजीनियरिंग टीम से support@superfast.com पर संपर्क करें।', 'समझ गया, वापस ले चलो', 'SuperFast सहायता डेस्क • SuperFast Mobility द्वारा संचालित'],
+                modal: ['जल्द आ रहा है', 'SuperFast ऐप जल्द लॉन्च हो रहा है!', 'हम बिना कमीशन, बिना सर्ज और उचित किराया बातचीत के साथ बेहतरीन राइड अनुभव तैयार कर रहे हैं। अल्ट्रा-फास्ट राइड के लिए तैयार हो जाइए!', 'समझ गया!', 'देश और भाषा', 'भाषा', 'सहेजें']
+            }
+        };
+
+        function setHighlightedText(elementId, text) {
+            const element = document.getElementById(elementId);
+            const parts = text.split('|');
+            element.innerHTML = `${parts[0]}<br class="hidden sm:inline"/>${parts[1]} <span class="highlight-box mt-2 sm:mt-0">${parts[2]}</span>`;
+        }
+
+        function updateDriverLanguage(language) {
+            const translation = driverTranslations[language];
+            driverLanguage = language;
+            document.getElementById('driverLangCode').textContent = translation.code;
+            document.getElementById('driverMobilityLabel').textContent = translation.mobility;
+            document.querySelector('header button').lastChild.textContent = ` ${translation.getApp}`;
+            setHighlightedText('driverHeroTitle', translation.heroTitle);
+            document.getElementById('driverHeroDescription').textContent = translation.heroDescription;
+            document.getElementById('driverDownloadButton').lastChild.textContent = ` ${translation.download}`;
+            setHighlightedText('driverFeaturesTitle', translation.featuresTitle);
+
+            translation.featureTitles.forEach((title, index) => {
+                document.getElementById(`driverFeatureTitle${index + 1}`).textContent = title;
+                document.getElementById(`driverFeatureText${index + 1}`).textContent = translation.featureTexts[index];
+            });
+
+            setHighlightedText('driverFaqTitle', translation.faqTitle);
+            document.querySelectorAll('.faq-btn > span').forEach((element, index) => {
+                element.textContent = translation.faqQuestions[index];
+            });
+            document.querySelectorAll('.faq-answer > div').forEach((element, index) => {
+                element.textContent = translation.faqAnswers[index];
+            });
+
+            document.querySelectorAll('footer h3').forEach((element, index) => {
+                element.textContent = translation.footerHeadings[index];
+            });
+            document.querySelectorAll('footer li a').forEach((element, index) => {
+                const icon = element.querySelector('i');
+                if (icon) {
+                    element.lastChild.textContent = ` ${translation.footerLinks[index]}`;
+                } else {
+                    element.textContent = translation.footerLinks[index];
+                }
+            });
+
+            const modalText = document.querySelector('#comingSoonModal');
+            modalText.querySelector('.coming-soon-badge').textContent = translation.modal[0];
+            modalText.querySelector('.coming-soon-title').textContent = translation.modal[1];
+            modalText.querySelector('.coming-soon-copy').textContent = translation.modal[2];
+            modalText.querySelector('.coming-soon-cta').textContent = translation.modal[3];
+
+            const languageModal = document.querySelector('#driverLangModal');
+            languageModal.querySelector('h2').textContent = translation.modal[4];
+            languageModal.querySelector('label').textContent = translation.modal[5];
+            languageModal.querySelector('button:last-child').textContent = translation.modal[6];
+
+            const issuePage = document.querySelector('#appIssuesPage');
+            issuePage.querySelector('button').lastChild.textContent = ` ${translation.appIssues[0]}`;
+            issuePage.querySelector('h1').textContent = translation.appIssues[1];
+            issuePage.querySelector('h1 + p').textContent = translation.appIssues[2];
+            issuePage.querySelector('h2').textContent = translation.appIssues[3];
+            const issueCards = issuePage.querySelectorAll('.grid > div');
+            issueCards.forEach((card, index) => {
+                card.querySelector('h3').textContent = translation.appIssues[4 + index * 2];
+                card.querySelector('p').textContent = translation.appIssues[5 + index * 2];
+            });
+            issuePage.querySelector('.pt-4 button').textContent = translation.appIssues[12];
+            issuePage.querySelector('.text-center.py-6').textContent = translation.appIssues[13];
+        }
+
+        function openDriverLangModal() {
+            document.getElementById('driverLanguageSelect').value = driverLanguage;
+            document.getElementById('driverLangModal').classList.remove('hidden');
+        }
+
+        function closeDriverLangModal() {
+            document.getElementById('driverLangModal').classList.add('hidden');
+        }
+
+        function saveDriverLanguage() {
+            updateDriverLanguage(document.getElementById('driverLanguageSelect').value);
+            closeDriverLangModal();
+        }
+
+        function openAppIssuesPage() {
+            document.getElementById('appIssuesPage').classList.remove('hidden');
+        }
+
+        function closeAppIssuesPage() {
+            document.getElementById('appIssuesPage').classList.add('hidden');
+        }
+
+        function handleNotifySubmit(e) {
+            e.preventDefault();
+            document.getElementById('notifyForm').classList.add('hidden');
+            document.getElementById('notifySuccess').classList.remove('hidden');
+        }
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('comingSoonModal');
+            if (event.target === modal) {
+                closeComingSoonModal();
+            }
+            const languageModal = document.getElementById('driverLangModal');
+            if (event.target === languageModal) {
+                closeDriverLangModal();
+            }
+        }
+    </script>
+</body>
+</html>
